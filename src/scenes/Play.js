@@ -57,6 +57,7 @@ class Play extends Phaser.Scene {
 
         // initialize score
         this.p1Score = 0;
+        this.specialCollect = 0;
 
         // display score
         let scoreConfig = {
@@ -83,6 +84,8 @@ class Play extends Phaser.Scene {
             this.add.text(game.config.width/2, game.config.height/2 + 64, 'Press (R) to Restart or ← for Menu', scoreConfig).setOrigin(0.5);
             this.gameOver = true;
         }, null, this);
+        
+        this.elapsed = this.clock.getElapsed();
     }
 
     update() {
@@ -109,50 +112,62 @@ class Play extends Phaser.Scene {
 
         // check collisions
         if(this.checkCollision(this.p1Rocket, this.ship03)) {
+            this.specialCollect = 0;
             this.p1Rocket.reset();
             this.shipExplode(this.ship03);   
         }
         if (this.checkCollision(this.p1Rocket, this.ship02)) {
+            this.specialCollect = 0;
             this.p1Rocket.reset();
             this.shipExplode(this.ship02);
         }
         if (this.checkCollision(this.p1Rocket, this.ship01)) {
-            this.p1Rocketv2.reset();
+            this.specialCollect = 0;
+            this.p1Rocket.reset();
             this.shipExplode(this.ship01);
         }
         if (this.checkCollision(this.p1Rocket, this.ship04)) {
+            this.specialCollect = 0;
             this.p1Rocket.reset();
             this.shipExplode(this.ship04);
         }
         if(this.checkCollision(this.p1Rocketv2, this.ship03)) {
+            this.specialCollect = 1;
             this.p1Rocketv2.reset();
             this.shipExplode(this.ship03);   
         }
         if (this.checkCollision(this.p1Rocketv2, this.ship02)) {
+            this.specialCollect = 1;
             this.p1Rocketv2.reset();
             this.shipExplode(this.ship02);
         }
         if (this.checkCollision(this.p1Rocketv2, this.ship01)) {
+            this.specialCollect = 1;
             this.p1Rocketv2.reset();
             this.shipExplode(this.ship01);
         }
         if (this.checkCollision(this.p1Rocketv2, this.ship04)) {
+            this.specialCollect = 1;
             this.p1Rocketv2.reset();
             this.shipExplode(this.ship04);
         }
         if(this.checkCollision(this.p1Rocketv3, this.ship03)) {
+            this.specialCollect = 1;
             this.p1Rocketv3.reset();
             this.shipExplode(this.ship03);   
         }
         if (this.checkCollision(this.p1Rocketv3, this.ship02)) {
+            this.specialCollect = 1;
             this.p1Rocketv3.reset();
             this.shipExplode(this.ship02);
         }
         if (this.checkCollision(this.p1Rocketv3, this.ship01)) {
+            this.specialCollect = 1;
             this.p1Rocketv3.reset();
             this.shipExplode(this.ship01);
         }
         if (this.checkCollision(this.p1Rocketv3, this.ship04)) {
+            this.specialCollect = 1;
             this.p1Rocketv3.reset();
             this.shipExplode(this.ship04);
         }
@@ -185,6 +200,9 @@ class Play extends Phaser.Scene {
         
         // score add and repaint
         this.p1Score += ship.points;
+        if (this.specialCollect == 1){
+            this.p1Score += ship.points;
+        }
         this.scoreLeft.text = this.p1Score;   
         this.sound.play('sfx_explosion');    
     }
