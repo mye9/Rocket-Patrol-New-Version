@@ -8,7 +8,8 @@ class Play extends Phaser.Scene {
         this.load.image('rocket', 'assets/rocket.png');
         this.load.image('spaceship', 'assets/spaceship.png');
         this.load.image('starfield', 'assets/starfield.png');
-        this.load.image('spaceshipv2', 'assets/newspaceshipv2.png')
+        this.load.image('spaceshipv2', 'assets/newspaceshipv2.png');
+        this.load.image('rocketv2', 'assets/newrocket.png');
         // load spritesheet
         this.load.spritesheet('explosion', 'assets/explosion.png', {frameWidth: 64, frameHeight: 32, startFrame: 0, endFrame: 9});
     }
@@ -28,10 +29,15 @@ class Play extends Phaser.Scene {
 
         // add rocket (p1)
         this.p1Rocket = new Rocket(this, game.config.width/2, game.config.height - borderUISize - borderPadding, 'rocket').setOrigin(0.5, 0);
+        this.p1Rocketv2 = new Rocketv2(this, game.config.width*0.75, game.config.height - borderUISize - borderPadding, 'rocketv2').setOrigin(0.5, 0);
+        this.p1Rocketv3 = new Rocketv3(this, game.config.width*0.25, game.config.height - borderUISize - borderPadding, 'rocketv2').setOrigin(0.5, 0);
+
 
         // define keys
         keyF = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.F);
         keyR = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.R);
+        keyG = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.G);
+        keyD = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.D);
         keyLEFT = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.LEFT);
         keyRIGHT = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.RIGHT);
 
@@ -93,6 +99,8 @@ class Play extends Phaser.Scene {
 
         if (!this.gameOver) {               
             this.p1Rocket.update();         // update rocket sprite
+            this.p1Rocketv2.update();         // update rocket sprite
+            this.p1Rocketv3.update();
             this.ship01.update();           // update spaceships (x3)
             this.ship02.update();
             this.ship03.update();
@@ -109,11 +117,43 @@ class Play extends Phaser.Scene {
             this.shipExplode(this.ship02);
         }
         if (this.checkCollision(this.p1Rocket, this.ship01)) {
-            this.p1Rocket.reset();
+            this.p1Rocketv2.reset();
             this.shipExplode(this.ship01);
         }
         if (this.checkCollision(this.p1Rocket, this.ship04)) {
             this.p1Rocket.reset();
+            this.shipExplode(this.ship04);
+        }
+        if(this.checkCollision(this.p1Rocketv2, this.ship03)) {
+            this.p1Rocketv2.reset();
+            this.shipExplode(this.ship03);   
+        }
+        if (this.checkCollision(this.p1Rocketv2, this.ship02)) {
+            this.p1Rocketv2.reset();
+            this.shipExplode(this.ship02);
+        }
+        if (this.checkCollision(this.p1Rocketv2, this.ship01)) {
+            this.p1Rocketv2.reset();
+            this.shipExplode(this.ship01);
+        }
+        if (this.checkCollision(this.p1Rocketv2, this.ship04)) {
+            this.p1Rocketv2.reset();
+            this.shipExplode(this.ship04);
+        }
+        if(this.checkCollision(this.p1Rocketv3, this.ship03)) {
+            this.p1Rocketv3.reset();
+            this.shipExplode(this.ship03);   
+        }
+        if (this.checkCollision(this.p1Rocketv3, this.ship02)) {
+            this.p1Rocketv3.reset();
+            this.shipExplode(this.ship02);
+        }
+        if (this.checkCollision(this.p1Rocketv3, this.ship01)) {
+            this.p1Rocketv3.reset();
+            this.shipExplode(this.ship01);
+        }
+        if (this.checkCollision(this.p1Rocketv3, this.ship04)) {
+            this.p1Rocketv3.reset();
             this.shipExplode(this.ship04);
         }
     }
