@@ -11,7 +11,7 @@ class Play extends Phaser.Scene {
         this.load.image('spaceshipv2', 'assets/newspaceshipv2.png');
         this.load.image('rocketv2', 'assets/newrocket.png');
         this.load.image('planet', 'assets/planet.png');
-        this.load.audio('bgm_15s', './assets/POL-gunman-short.wav');
+        this.load.audio('bgm_15s', './assets/POL-gunman-short.wav');  //the background music is from the royalty free music, which is a copy-free music
         // load spritesheet
         this.load.spritesheet('explosion', 'assets/Sprite-0006v2.png', {frameWidth: 64, frameHeight: 32, startFrame: 0, endFrame: 6});
     }
