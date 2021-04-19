@@ -22,10 +22,10 @@ class Play extends Phaser.Scene {
         this.add.rectangle(0, borderUISize + borderPadding, game.config.width, borderUISize * 2, 0x00FF00).setOrigin(0, 0);
 
         // white borders
-        this.add.rectangle(0, 0, game.config.width, borderUISize, 0xFFFFFF).setOrigin(0, 0);
-        this.add.rectangle(0, game.config.height - borderUISize, game.config.width, borderUISize, 0xFFFFFF).setOrigin(0, 0);
+        // this.add.rectangle(0, 0, game.config.width, borderUISize, 0xFFFFFF).setOrigin(0, 0);
+        // this.add.rectangle(0, game.config.height - borderUISize, game.config.width, borderUISize, 0xFFFFFF).setOrigin(0, 0);
         this.add.rectangle(0, 0, borderUISize, game.config.height, 0xFFFFFF).setOrigin(0, 0);
-        this.add.rectangle(game.config.width - borderUISize, 0, borderUISize, game.config.height, 0xFFFFFF).setOrigin(0, 0);
+        // this.add.rectangle(game.config.width - borderUISize, 0, borderUISize, game.config.height, 0xFFFFFF).setOrigin(0, 0);
 
         // add rocket (p1)
         this.p1Rocket = new Rocket(this, game.config.width/2, game.config.height - borderUISize - borderPadding, 'rocket').setOrigin(0.5, 0);
@@ -82,9 +82,17 @@ class Play extends Phaser.Scene {
 
         // 60-second play clock
         this.specialClock = this.time.delayedCall(30000, () => {
-            this.ship01.moveSpeed = 20;
-            this.ship02.moveSpeed = 20;
-            this.ship03.moveSpeed = 20;
+            if (game.settings.mode == 0){
+                this.ship01.moveSpeed = 5;
+                this.ship02.moveSpeed = 5;
+                this.ship03.moveSpeed = 5;
+            }
+            if(game.settings.mode == 1){
+                this.ship01.moveSpeed = 6;
+                this.ship02.moveSpeed = 6;
+                this.ship03.moveSpeed = 6;
+            }
+ 
         }, null, this);
 
         scoreConfig.fixedWidth = 0;
