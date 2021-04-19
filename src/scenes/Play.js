@@ -10,6 +10,7 @@ class Play extends Phaser.Scene {
         this.load.image('starfield', 'assets/starfield.png');
         this.load.image('spaceshipv2', 'assets/newspaceshipv2.png');
         this.load.image('rocketv2', 'assets/newrocket.png');
+        this.load.image('planet', 'assets/planet.png');
         this.load.audio('bgm_15s', './assets/POL-gunman-short.wav');
         // load spritesheet
         this.load.spritesheet('explosion', 'assets/Sprite-0006v2.png', {frameWidth: 64, frameHeight: 32, startFrame: 0, endFrame: 6});
@@ -19,6 +20,7 @@ class Play extends Phaser.Scene {
         this.sound.play('bgm_15s');
         // place tile sprite
         this.starfield = this.add.tileSprite(0, 0, 640, 480, 'starfield').setOrigin(0, 0); 
+        this.planet = this.add.tileSprite(game.config.width/2, borderUISize*8 + borderPadding*8, 32, 32, 'planet').setOrigin(0, 0); 
 
         // green UI background
         this.add.rectangle(0, borderUISize + borderPadding, game.config.width, borderUISize * 2, 0x00FF00).setOrigin(0, 0);
@@ -137,6 +139,7 @@ class Play extends Phaser.Scene {
 
 
         this.starfield.tilePositionX -= 4;
+        this.planet.tilePositionX -= 4;
 
         if (!this.gameOver) {               
             this.p1Rocket.update();         // update rocket sprite
