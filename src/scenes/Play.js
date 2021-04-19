@@ -100,14 +100,14 @@ class Play extends Phaser.Scene {
     update() {
         // check key input for restart
         if (this.gameOver && Phaser.Input.Keyboard.JustDown(keyR)) {
-            if(this.p1Score > game.settings.highScore){
+            if(this.p1Score >= game.settings.highScore){
                 game.settings.highScore = this.p1Score;
             }
             this.scene.restart();
         }
 
         if (this.gameOver && Phaser.Input.Keyboard.JustDown(keyLEFT)) {
-            if(this.p1Score > game.settings.highScore){
+            if(this.p1Score >= game.settings.highScore){
                 game.settings.highScore = this.p1Score;
                 game.specialScore = this.p1Score;
             }
@@ -222,7 +222,12 @@ class Play extends Phaser.Scene {
         if (this.specialCollect == 1){
             this.p1Score += ship.points;
         }
-        this.scoreLeft.text = this.p1Score;   
+        if (this.p1Score > game.settings.highScore){
+            game.settings.highScore = this.p1Score;
+        }
+        this.scoreLeft.text = this.p1Score;
+        this.scoreMiddle.text = game.settings.highScore;   
+
         this.sound.play('sfx_explosion');    
     }
     

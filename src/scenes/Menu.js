@@ -63,6 +63,9 @@ class Menu extends Phaser.Scene {
             gameTimer: 45000,
             highScore: 0   
           }
+          if (game.specialScore > game.settings.highScore){
+            game.settings.highScore = game.specialScore; 
+          }
           this.sound.play('sfx_select');
           this.scene.start('playScene');    
         }
