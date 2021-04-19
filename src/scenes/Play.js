@@ -58,6 +58,7 @@ class Play extends Phaser.Scene {
         // initialize score
         this.p1Score = 0;
         this.specialCollect = 0;
+        this.highScore = 0;
 
         // display score
         let scoreConfig = {
@@ -73,12 +74,19 @@ class Play extends Phaser.Scene {
             fixedWidth: 100
         }
         this.scoreLeft = this.add.text(borderUISize + borderPadding, borderUISize + borderPadding*2, this.p1Score, scoreConfig);
+        this.scoreMiddle = this.add.text(borderUISize*7, borderUISize + borderPadding*2, game.settings.highScore, scoreConfig);
 
 
         // GAME OVER flag
         this.gameOver = false;
 
         // 60-second play clock
+        this.specialClock = this.time.delayedCall(30000, () => {
+            this.ship01.moveSpeed = 20;
+            this.ship02.moveSpeed = 20;
+            this.ship03.moveSpeed = 20;
+        }, null, this);
+
         scoreConfig.fixedWidth = 0;
         this.clock = this.time.delayedCall(game.settings.gameTimer, () => {
             this.add.text(game.config.width/2, game.config.height/2, 'GAME OVER', scoreConfig).setOrigin(0.5);
@@ -92,11 +100,18 @@ class Play extends Phaser.Scene {
     update() {
         // check key input for restart
         if (this.gameOver && Phaser.Input.Keyboard.JustDown(keyR)) {
+            if(this.p1Score > game.settings.highScore){
+                game.settings.highScore = this.p1Score;
+            }
             this.scene.restart();
         }
 
         if (this.gameOver && Phaser.Input.Keyboard.JustDown(keyLEFT)) {
-            this.scene.start("menuScene");
+            if(this.p1Score > game.settings.highScore){
+                game.settings.highScore = this.p1Score;
+                game.specialScore = this.p1Score;
+            }
+            this.scene.start("menuScene", game.settings.highScore);
         }
 
 

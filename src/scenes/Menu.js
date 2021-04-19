@@ -43,7 +43,12 @@ class Menu extends Phaser.Scene {
           game.settings = {
             spaceshipSpeed: 4,
             spaceshipv2Speed: 6,
-            gameTimer: 60000    
+            mode: 0,
+            gameTimer: 60000,  
+            highScore: 0  
+          }
+          if (game.specialScore > game.settings.highScore){
+            game.settings.highScore = game.specialScore; 
           }
           this.sound.play('sfx_select');
           this.scene.start('playScene');    
@@ -54,7 +59,9 @@ class Menu extends Phaser.Scene {
           game.settings = {
             spaceshipSpeed: 6,
             spaceshipv2Speed: 8,
-            gameTimer: 45000    
+            mode: 1,
+            gameTimer: 45000,
+            highScore: 0   
           }
           this.sound.play('sfx_select');
           this.scene.start('playScene');    
