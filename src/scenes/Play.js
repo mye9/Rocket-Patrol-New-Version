@@ -74,6 +74,7 @@ class Play extends Phaser.Scene {
         }
         this.scoreLeft = this.add.text(borderUISize + borderPadding, borderUISize + borderPadding*2, this.p1Score, scoreConfig);
 
+
         // GAME OVER flag
         this.gameOver = false;
 
@@ -98,6 +99,8 @@ class Play extends Phaser.Scene {
             this.scene.start("menuScene");
         }
 
+
+
         this.starfield.tilePositionX -= 4;
 
         if (!this.gameOver) {               
@@ -109,6 +112,7 @@ class Play extends Phaser.Scene {
             this.ship03.update();
             this.ship04.update();
         } 
+
 
         // check collisions
         if(this.checkCollision(this.p1Rocket, this.ship03)) {

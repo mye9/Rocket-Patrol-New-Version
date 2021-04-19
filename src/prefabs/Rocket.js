@@ -4,6 +4,7 @@ class Rocket extends Phaser.GameObjects.Sprite {
       super(scene, x, y, texture, frame);
 
       scene.add.existing(this);   // add to existing, displayList, updateList
+      this.myScene = scene;
       this.isFiring = false;      // track rocket's firing status
       this.moveSpeed = 2;         // pixels per frame
       this.sfxRocket = scene.sound.add('sfx_rocket'); // add rocket sfx
@@ -11,6 +12,24 @@ class Rocket extends Phaser.GameObjects.Sprite {
     update() {
         // left/right movement
         if(!this.isFiring) {
+            let notfireConfig = {
+                fontFamily: 'Courier',
+                fontSize: '28px',
+                backgroundColor: '#00FF00',
+                color: '#00FF00',
+                align: 'right',
+                padding: {
+                    top: 5,
+                    bottom: 5,
+                },
+                fixedWidth: 100
+            }
+            this.myScene.add.text(borderUISize*7, borderUISize + borderPadding*2, '', notfireConfig);
+            if(keyLEFT.isDown && this.x >= borderUISize + this.width) {
+                this.x -= this.moveSpeed;
+            } else if (keyRIGHT.isDown && this.x <= game.config.width - borderUISize - this.width) {
+                this.x += this.moveSpeed;
+            }      
             if(keyLEFT.isDown && this.x >= borderUISize + this.width) {
                 this.x -= this.moveSpeed;
             } else if (keyRIGHT.isDown && this.x <= game.config.width - borderUISize - this.width) {
@@ -18,6 +37,25 @@ class Rocket extends Phaser.GameObjects.Sprite {
             }
         }
         if(this.isFiring) {
+            let fireConfig = {
+                fontFamily: 'Courier',
+                fontSize: '28px',
+                backgroundColor: '#F3B141',
+                color: '#843605',
+                align: 'right',
+                padding: {
+                    top: 5,
+                    bottom: 5,
+                },
+                fixedWidth: 100
+            }
+            this.myScene.add.text(borderUISize*15, borderUISize + borderPadding*2, 'FIRE', fireConfig);
+            
+            if(keyLEFT.isDown && this.x >= borderUISize + this.width) {
+                this.x -= this.moveSpeed;
+            } else if (keyRIGHT.isDown && this.x <= game.config.width - borderUISize - this.width) {
+                this.x += this.moveSpeed;
+            }      
             if(keyLEFT.isDown && this.x >= borderUISize + this.width) {
                 this.x -= this.moveSpeed;
             } else if (keyRIGHT.isDown && this.x <= game.config.width - borderUISize - this.width) {
