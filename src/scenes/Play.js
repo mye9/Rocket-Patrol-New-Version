@@ -5,14 +5,14 @@ class Play extends Phaser.Scene {
 
     preload() {
         // load images/tile sprites
-        this.load.image('rocket', 'assets/rocket.png');
-        this.load.image('spaceship', 'assets/spaceship.png');
+        this.load.image('rocket', 'assets/newrocketv3.png');
+        this.load.image('spaceship', 'assets/newspaceshipv3.png');
         this.load.image('starfield', 'assets/starfield.png');
         this.load.image('spaceshipv2', 'assets/newspaceshipv2.png');
         this.load.image('rocketv2', 'assets/newrocket.png');
         this.load.audio('bgm_15s', './assets/POL-gunman-short.wav');
         // load spritesheet
-        this.load.spritesheet('explosion', 'assets/explosion.png', {frameWidth: 64, frameHeight: 32, startFrame: 0, endFrame: 9});
+        this.load.spritesheet('explosion', 'assets/Sprite-0006v2.png', {frameWidth: 64, frameHeight: 32, startFrame: 0, endFrame: 6});
     }
     
     create() {
@@ -53,7 +53,7 @@ class Play extends Phaser.Scene {
         // animation config
         this.anims.create({
             key: 'explode',
-            frames: this.anims.generateFrameNumbers('explosion', { start: 0, end: 9, first: 0}),
+            frames: this.anims.generateFrameNumbers('explosion', { start: 0, end: 6, first: 0}),
             frameRate: 30
         });
 
